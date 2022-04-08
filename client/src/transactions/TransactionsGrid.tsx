@@ -54,10 +54,10 @@ const TransactionsGrid = ({
           <Table.Body>
             {transactions.map((transaction: Transaction) =>
               transaction.status === TransactionStatus.Preliminary ?
-                <PreliminaryTransactionRow key={transaction.id} transaction={transaction} onRemove={removeTransaction} isAdmin={isAdmin} />
+                <PreliminaryTransactionRow key={transaction._id} transaction={transaction} onRemove={removeTransaction} isAdmin={isAdmin} />
                 : transaction.status === TransactionStatus.New ?
-                  <EditTransactionRow key={transaction.id} updateTransaction={updateTransaction} transaction={transaction} saveTransaction={saveTransaction} cancelTransaction={cancelTransaction} /> :
-                  <TransactionRow key={transaction.id} transaction={transaction} onRemove={removeTransaction} isAdmin={isAdmin} />
+                  <EditTransactionRow key={transaction._id} updateTransaction={updateTransaction} transaction={transaction} saveTransaction={saveTransaction} cancelTransaction={cancelTransaction} /> :
+                  <TransactionRow key={transaction._id} transaction={transaction} onRemove={removeTransaction} isAdmin={isAdmin} />
             )}
           </Table.Body>
         )}

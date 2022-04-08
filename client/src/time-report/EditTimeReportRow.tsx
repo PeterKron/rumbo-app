@@ -67,8 +67,9 @@ const EditTimeReportRow = ({
  
   const submitTimeReport = (timeReport: TimeReport) => {
     if (isFormValid(timeReport)) {
-
-      if (timeReport.id > 0) {
+      
+      if (timeReport._id.length > 0) {
+        // console.log(timeReport, 'update from EDIT TIME REPORT ROW');
         dispatch(saveUpdatedTimeReport(timeReport));
       } else {
         saveTimeReport(timeReport);
@@ -108,12 +109,12 @@ const EditTimeReportRow = ({
     );
 
     if (project) {
-      updateTimeReport({ ...timeReport, project_id: project.id });
+      updateTimeReport({ ...timeReport, project_id: project._id });
     }
   };
 
   return (
-    <Table.Row key={timeReport.id}>
+    <Table.Row key={timeReport._id}>
       <Table.Cell maxWidth="125px">
         <EvergreenDatePicker
           selectedTime={date}

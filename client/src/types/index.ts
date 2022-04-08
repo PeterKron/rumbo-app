@@ -1,5 +1,5 @@
 export type Transaction = {
-  id?: number,
+  _id?: string,
   email: string;
   time: Date;
   amount: number;
@@ -18,24 +18,24 @@ export enum TransactionStatus {
 }
 
 export type TimeReport = {
-  id: number,
+  _id: string,
   email: string;
   time: Date;
   description: string;
   hours: number;
-  project_id: number;
+  project_id: string;
   editMode?: boolean;
 };
 
-export type NewTimeReport = {
-  id: number,
-  email: string;
-  time: Date;
-  hours?: number;
-  description: string;
-  project_id: number;
-  editMode?: boolean;
-};
+// export type NewTimeReport = {
+//   id: number,
+//   email: string;
+//   time: Date;
+//   description: string;
+//   hours?: number;
+//   project_id: number;
+//   editMode?: boolean;
+// };
 
 export type DateFilter = {
   year: number;

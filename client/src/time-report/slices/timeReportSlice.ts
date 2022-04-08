@@ -74,12 +74,14 @@ export const saveUpdatedTimeReport: any = createAsyncThunk<any, TimeReport>(
 export const removeTimeReport: any = createAsyncThunk<any, TimeReport>(
   "timereport/remove",
   async ({ user, timeReport }: any, thunkAPI) => {
+    // console.log(user, timeReport, 'removetimereport from slice');
+    
     const state: any = thunkAPI.getState();
     const response = await deleteTimeReport(
       state.authentication.jwtIdToken,
       timeReport
     );
-    //thunkAPI.dispatch(fetchTimeReports({ email: user.email }));
+    thunkAPI.dispatch(fetchTimeReportsByUser({ email: user.email }));
     return response;
   }
 );
@@ -126,9 +128,9 @@ const timeReportSlice = createSlice({
         time: action.payload,
         description: '',
         hours: 0,
-        id: -1,
+        _id: '',
         email: '',
-        project_id: 0,
+        project_id: '',
         editMode: true
       }
       state.entities.push(newTimeReport);
@@ -136,7 +138,7 @@ const timeReportSlice = createSlice({
 
     cancelNew(state, action: PayloadAction<TimeReport>) {
 
-      state.entities = [...state.entities].filter(timereport => timereport.id != -1);
+      state.entities = [...state.entities].filter(timereport => timereport._id != '');
       state.entities.forEach((timereport) => delete timereport.editMode);
 
     },
@@ -144,11 +146,11 @@ const timeReportSlice = createSlice({
     // TODO Byt namn till editTimeReport? 
     updateTimeReport(state, action: PayloadAction<TimeReport>) {
 
-      state.entities = state.entities.map(timereport => timereport.id === action.payload.id ? action.payload : { ...timereport });
+      state.entities = state.entities.map(timereport => timereport._id === action.payload._id ? action.payload : { ...timereport });
 
     },
-    editMode(state, action: PayloadAction<number>) {
-      state.entities = state.entities.map(timereport => timereport.id === action.payload ? { ...timereport, editMode: true } : { ...timereport });
+    editMode(state, action: PayloadAction<string>) {
+      state.entities = state.entities.map(timereport => timereport._id === action.payload ? { ...timereport, editMode: true } : { ...timereport });
     },
   },
 
@@ -204,7 +206,7 @@ const timeReportSlice = createSlice({
     },
 
     [removeTimeReport.fulfilled]: (state, action) => {
-      state.entities = [...state.entities].filter(timereport => timereport.id != action.payload.id);
+      state.entities = [...state.entities].filter(timereport => timereport._id != action.payload.id);
     }
   },
 });

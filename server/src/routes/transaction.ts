@@ -9,14 +9,12 @@ router.delete("/:transactionId", async (req, res) => {
     if (!req["isAdmin"]) {
       res.sendStatus(401).end();
     } else {
-  
-      const transactionId = Number(req.params.transactionId);
-      console.log(transactionId);
-  
-      if (!Number.isInteger(transactionId)) {
+      const transactionId = (req.params.transactionId);
+      // console.log(transactionId);
+      if (!(transactionId)) {
         return res.sendStatus(400);
       } else {
-        const transaction = await getTransactionById(Number(transactionId));
+        const transaction = await getTransactionById((transactionId));
         if (!transaction) {
           res.sendStatus(404);
         } else {
@@ -24,7 +22,6 @@ router.delete("/:transactionId", async (req, res) => {
           res.json(transaction);
         }
       }
-  
       res.json();
     }
   });

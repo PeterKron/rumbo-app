@@ -14,7 +14,6 @@ export const getTimeReportsByUser = (jwtToken: string, email: string, year?: num
 };
 
 export const getTimeReportsByProject = (jwtToken: string, id: number, year?: number, month?: number) => {
-
     let queries = [];
     if (year) {
         queries.push(`year=${year}`);
@@ -43,7 +42,9 @@ export const postTimeReport = (jwtToken: string,
 };
 
 export const updateTimeReport = (jwtToken: string, timeReport: TimeReport) => {
-    return fetch(`${process.env.REACT_APP_API_BASE_URL}/${timeReport.email}/timereport/${timeReport.id}`, {
+    console.log(timeReport, 'updated from CRUD');
+    
+    return fetch(`${process.env.REACT_APP_API_BASE_URL}/${timeReport.email}/timereport/${timeReport._id}`, {
         method: 'PUT',
         body: JSON.stringify(timeReport),
         headers: { authorization: `bearer ${jwtToken}`, 'Content-Type': 'application/json' },
@@ -51,7 +52,9 @@ export const updateTimeReport = (jwtToken: string, timeReport: TimeReport) => {
 };
 
 export const deleteTimeReport = (jwtToken: string, timeReport: TimeReport) => {
-    return fetch(`${process.env.REACT_APP_API_BASE_URL}/${timeReport.email}/timereport/${timeReport.id}`, {
+    // console.log(timeReport, 'deletetimeReport from CRUD');
+    
+    return fetch(`${process.env.REACT_APP_API_BASE_URL}/${timeReport.email}/timereport/${timeReport._id}`, {
         method: 'DELETE',
         headers: { authorization: `bearer ${jwtToken}`, 'Content-Type': 'application/json' },
     }).then((res: any) => res.json());

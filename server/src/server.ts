@@ -5,11 +5,15 @@ import { refreshToken } from "./eaccounting";
 import { getProjects } from "./db/project";
 import { getDescriptionsByEmail } from "./db/description";
 
+import mongoose from 'mongoose'
+mongoose.connect('mongodb://localhost:27017/rumbo')
+
 import userRouter from './routes/user';
 import transactionRouter from './routes/transaction';
 import vismaRouter from './routes/visma';
 import timeReportRouter from './routes/timeReport';
 import employeeRouter from './routes/employee';
+
 
 const env = process.env.ENV || 'local';
 dotenv.config({ path: `config/${env}.env` });

@@ -1,4 +1,3 @@
-
 import { useEffect } from "react";
 import { useParams } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
@@ -30,7 +29,7 @@ const ProjectView = ({ user }: ProjectViewType) => {
     (state: any) => state.timeReport.filter
   );
 
-  const project: Project = useSelector((state: any) => state.app.projects.find((project: Project) => project.id == params.projectId)); // TODO våre snyggare om params.projectId var av typen number? 
+  const project: Project = useSelector((state: any) => state.app.projects.find((project: Project) => project._id == params.projectId)); // TODO våre snyggare om params.projectId var av typen number? 
 
   useEffect(() => {
     dispatch(fetchTimeReportsByProject(project));

@@ -1,5 +1,5 @@
 import express from "express";
-import { getTransactions, getTransactionsMeta, filterOutExistingTransactions } from "../db/transaction";
+import { getTransactions, getTransactionsMeta } from "../db/transaction";
 import { getTimeReport, getTimeReportMeta } from "../db/timereport";
 import { getSalaryTransactions } from "../eaccounting";
 
@@ -32,8 +32,12 @@ router.get("/:email/transaction", async (req, res) => {
 
 // TODO skapa en project route? 
 
-router.get("/:email/timereport", async (req, res) => {
+// router.get("/:email/timereport", async (req, res) => {
+//   const timereports = await getTimeReport();
+//     res.status(200).json(timereports);
+// });
 
+router.get("/:email/timereport", async (req, res) => {
 
   if (req.params.email != req["user"] && !req["isAdmin"]) {
     res.sendStatus(401).end();
@@ -41,10 +45,9 @@ router.get("/:email/timereport", async (req, res) => {
     let filter: any = {
       email: req.params.email,
     };
-
-    if (req.query.user) {
-      console.log(req["user"]);
-    }
+    // if (req.query.user) {
+    //   console.log(req["user"]);
+    // }
     if (req.query.year) {
       filter.year = req.query.year;
     }
@@ -55,11 +58,12 @@ router.get("/:email/timereport", async (req, res) => {
       filter.project = req.query.project_id;
     }
     const timeReport = await getTimeReport(filter);
-    console.log(timeReport);
-    const mappedReports = timeReport.map((timereport) => ({ ...timereport, hours: Number(timereport.hours) }))
-    res.json(mappedReports);
+    // const timeReport = await getTimeReport();
+    // console.log(timeReport);
+    // const mappedReports = timeReport.map((timereport) => ({ ...timereport, hours: Number(timereport.hours) }))
+    // res.json(mappedReports);
+    res.json(timeReport);
   }
-
 });
 
 router.get("/:email/transactionsmeta", async (req, res) => {
@@ -88,15 +92,15 @@ router.get("/:email/timereportmeta", async (req, res) => {
   }
 })
 
-router.get("/:email/import-visma", async (req, res) => {
-  if (!req["isAdmin"]) {
-    res.sendStatus(401).end();
-  } else {
-    const salaryTransactions = await getSalaryTransactions(2021, 12, "Liss Carl Martin Jonatan Hallenberg");
-    console.log('salaryTransactions', salaryTransactions);
-    const filteredTransactions = await filterOutExistingTransactions(salaryTransactions);
-    res.json(filteredTransactions);
-  }
-})
+// router.get("/:email/import-visma", async (req, res) => {
+//   if (!req["isAdmin"]) {
+//     res.sendStatus(401).end();
+//   } else {
+//     const salaryTransactions = await getSalaryTransactions(2021, 12, "Liss Carl Martin Jonatan Hallenberg");
+//     console.log('salaryTransactions', salaryTransactions);
+//     const filteredTransactions = await filterOutExistingTransactions(salaryTransactions);
+//     res.json(filteredTransactions);
+//   }
+// })
 
 export default router;

@@ -1,5 +1,5 @@
-export type Transaction = {
-  id?: number,
+export type TransactionType = {
+  _id?: string,
   email: string;
   time: Date;
   amount: number;
@@ -15,11 +15,11 @@ export enum TransactionStatus {
   Rejected
 }
 
-export type TimeReport = {
-  id?: number,
+export type TimeReportType = {
+  _id?: string,
   email: string;
   time: Date;
   description: string;
   hours: number;
-  project_id: number;
+  project_id: string;
 }

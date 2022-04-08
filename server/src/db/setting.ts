@@ -1,5 +1,5 @@
 import { query } from "./db";
-import { Transaction } from "../types";
+import { TransactionType } from "../types";
 
 type Setting = {
   id: number;

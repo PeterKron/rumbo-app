@@ -56,7 +56,7 @@ const TransactionRow = ({
 
   return (
     <StyledTableRow
-      key={transaction.id}
+      key={transaction._id}
     >
       { !isMobile && (
         <>

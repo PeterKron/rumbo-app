@@ -84,7 +84,7 @@ const EditTransactionRow = ({
 
   return (
     <>
-      <Table.Row key={transaction.id}>
+      <Table.Row key={transaction._id}>
         <Table.Cell maxWidth="125px">
           <EvergreenDatePicker
             selectedTime={transaction.time}

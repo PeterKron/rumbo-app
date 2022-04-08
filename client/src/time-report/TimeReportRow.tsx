@@ -45,7 +45,7 @@ const TimeReportRow = ({
     const [showConfirmDelete, setShowConfirmDelete] = useState(false);
     const projects = useSelector((state: any) => state.app.projects); // flytta ut till View
     
-    const project = projects.find((project: Project) => timereport.project_id === project.id);
+    const project = projects.find((project: Project) => timereport.project_id === project._id);
 
     const renderMoreMenu = () => (
         <>
@@ -63,7 +63,7 @@ const TimeReportRow = ({
 
     return (
         <StyledTableRow
-            key={timereport.id}
+            key={timereport._id}
         >
             {!isMobile && (
                 <>

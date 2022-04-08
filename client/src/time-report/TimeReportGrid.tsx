@@ -68,8 +68,8 @@ const TimeReportGrid = ({
                 </Table.Head>
                 <Table.Body>
                     {timereport.map((timereport: TimeReport) => timereport.editMode ?
-                        <EditTimeReportRow key={timereport.id} projects={projects} updateTimeReport={updateTimeReport} timeReport={timereport} saveTimeReport={saveTimeReport} cancelTimeReport={cancelTimeReport} /> :
-                        <TimeReportRow key={timereport.id} timereport={timereport} onRemove={removeTimeReport} isAdmin={isAdmin} />
+                        <EditTimeReportRow key={timereport._id} projects={projects} updateTimeReport={updateTimeReport} timeReport={timereport} saveTimeReport={saveTimeReport} cancelTimeReport={cancelTimeReport} /> :
+                        <TimeReportRow key={timereport._id} timereport={timereport} onRemove={removeTimeReport} isAdmin={isAdmin} />
                     )}
                 </Table.Body>
             </Table>

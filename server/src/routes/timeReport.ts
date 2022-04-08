@@ -1,9 +1,14 @@
 import express from 'express';
 import { getTimeReport, addTimeReport, updateTimeReport, getTimeReportById, deleteTimeReportById } from "../db/timereport";
 import { validationResult } from "express-validator";
-import { TimeReport } from '../types';
+import { TimeReportType } from '../types';
 
 const router = express.Router();
+
+router.get('/project/:id/timereport', async (req, res) => {
+  const timereports = await getTimeReport(req.body);
+  res.status(200).json(timereports);
+})
 
 router.get('/project/:id/timereport', (req, res) => {
   if (!req["isAdmin"]) {
@@ -38,11 +43,22 @@ router.post("/timereport", async (req, res) => {
       description: req.body.description,
       hours: req.body.hours,
       project_id: req.body.project_id
-    }) as TimeReport;
-
-    const mapTimeReportData = { ...newTimeReport[0], hours: Number(newTimeReport[0].hours) };
+    }) as TimeReportType;
+    
+    // const newTimeReport = await addTimeReport(req.body) 
+    let timeReportArr = []
+    timeReportArr.push(newTimeReport)
+    
+    const mapTimeReportData = { ...timeReportArr[0], hours: Number(timeReportArr[0].hours) };
     delete mapTimeReportData.created_at;
-    res.json(mapTimeReportData);
+    res.json(mapTimeReportData['_doc']);
+    // res.json(mapTimeReportData[0]);
+
+    // const mapTimeReportData = { ...timeReportArr[0], hours: Number(timeReportArr[0].hours) };
+    // console.log(mapTimeReportData);
+    
+    // delete mapTimeReportData.created_at;
+    // res.json(mapTimeReportData);
   }
 });
 
@@ -56,13 +72,13 @@ router.put("/:email/timereport/:id", async (req, res) => {
       return res.status(400).json({ errors: errors.array() });
     }
 
-    const updatedTimeReport = await updateTimeReport({
+    const updatedTimeReport = await updateTimeReport(req.params.id, {
       email: req.body.email,
       time: req.body.time,
       hours: req.body.hours,
       description: req.body.description,
       project_id: req.body.project_id,
-      id: req.body.id
+      _id: req.body.id
     });
 
     res.json(updatedTimeReport);
@@ -75,13 +91,13 @@ router.delete("/:email/timereport/:timeReportId", async (req, res) => {
     console.log("Loggar params", req.params);
   } else {
 
-    const timeReportId = Number(req.params.timeReportId);
+    const timeReportId = req.params.timeReportId;
     console.log(timeReportId);
 
-    if (!Number.isInteger(timeReportId)) {
+    if (!timeReportId) {
       return res.sendStatus(400);
     } else {
-      const timeReport = await getTimeReportById(Number(timeReportId));
+      const timeReport = await getTimeReportById(timeReportId);
       if (!timeReport) {
         res.sendStatus(404);
       } else {
