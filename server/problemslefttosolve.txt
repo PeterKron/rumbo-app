@@ -1,5 +1,3 @@
-rendering transactions on create FAKTIST PÅ FRONTEND
 meta/filter transactions not really working on year fetches both years
-SETTINGS
-DESCPRIPTIONS
 MIGRERINGSSCRIPT
+DATUM VID TRANSACTIONS? hur ändrar vi fråga sebastian

@@ -78,7 +78,7 @@ router.put("/:email/timereport/:id", async (req, res) => {
       hours: req.body.hours,
       description: req.body.description,
       project_id: req.body.project_id,
-      _id: req.body.id
+      // _id: req.body.id
     });
 
     res.json(updatedTimeReport);

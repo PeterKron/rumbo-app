@@ -75,7 +75,7 @@ const TransactionsView = ({ jwtToken, user, isAdmin }: TransactionsViewType) => 
   }
 
   return (
-    <ViewWrapper title="Personlig balansräkning" renderButtons={renderButtons}>
+    <ViewWrapper title="Räkna ihop smeten" renderButtons={renderButtons}>
       <TimespanSelector
         onChange={(newFilter: DateFilter) =>
           dispatch(transactionsSlice.actions.setFilter(newFilter))

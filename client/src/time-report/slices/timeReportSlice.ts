@@ -66,7 +66,7 @@ export const saveUpdatedTimeReport: any = createAsyncThunk<any, TimeReport>(
     const state: any = thunkAPI.getState();
     const response = await updateTimeReport(state.authentication.jwtIdToken, {...timeReport, time: timeReport.time.toDateString()}
     );
-    console.log("Vi har hamnat i slicen ", timeReport);
+    // console.log("Vi har hamnat i slicen ", timeReport);
     return response;
   }
 );

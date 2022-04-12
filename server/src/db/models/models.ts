@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import { Setting } from "../setting";
 import { TimeReportType, TransactionType } from "../../types";
 
 export interface EmployeeType {
@@ -48,10 +49,17 @@ const projectschema = new mongoose.Schema<ProjectType>({
     active: {type: Boolean, required: true}
 })
 
+const settingschema = new mongoose.Schema<Setting>({
+    _id: {type: String, required: true},
+    key: {type: String, required: true},
+    value: {type: String, required: true},
+})
+
 export const EmployeeModel = mongoose.model<EmployeeType>('employee', employeeschema)
 export const TimeReportModel = mongoose.model<TimeReportType>('timereport', timereportschema)
 export const TransactionModel = mongoose.model<TransactionType>('transaction', transactionschema)
 export const ProjectModel = mongoose.model<ProjectType>('project', projectschema)
+export const SettingModel = mongoose.model<Setting>('setting', settingschema)
 
 
 

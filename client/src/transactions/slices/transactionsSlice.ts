@@ -60,11 +60,11 @@ export const saveNewTransaction: any = createAsyncThunk<any, Transaction>(
   "transactions/create",
   async ({ user, transaction }: any, thunkAPI) => {
     const state: any = thunkAPI.getState();
+    thunkAPI.dispatch(fetchTransactions({ email: user.email }));
     const response = await postTransaction(
       state.authentication.jwtIdToken,
       { ...transaction, email: user.email, time: transaction.time.toDateString() }
     );
-    thunkAPI.dispatch(fetchTransactions({ email: user.email }));
     return response;
   }
 );

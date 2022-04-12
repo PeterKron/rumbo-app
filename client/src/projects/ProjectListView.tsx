@@ -41,7 +41,7 @@ const ProjectListView = ({ user }: ProjectViewType) => {
 
   return (
 
-    <ViewWrapper title="Projekt">
+    <ViewWrapper title="Låtsasjobben">
 
       <Pane
         clearfix

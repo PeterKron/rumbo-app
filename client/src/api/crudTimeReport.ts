@@ -42,7 +42,7 @@ export const postTimeReport = (jwtToken: string,
 };
 
 export const updateTimeReport = (jwtToken: string, timeReport: TimeReport) => {
-    console.log(timeReport, 'updated from CRUD');
+    // console.log(timeReport, 'updated from CRUD');
     
     return fetch(`${process.env.REACT_APP_API_BASE_URL}/${timeReport.email}/timereport/${timeReport._id}`, {
         method: 'PUT',

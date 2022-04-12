@@ -3,24 +3,26 @@ import React, { useMemo } from "react";
 const generateGreeting = () => {
   const hour = new Date().getHours();
   if (hour > 17) return "God kväll";
-  if (hour > 10) {
+  if (hour > 9) {
     var greetings = [
       "Hallå",
       "Hej",
-      "Hejsan",
-      "Morsning",
-      "Morsning korsning",
-      "Tja",
-      "Tjabba",
-      "Tjena",
-      "Tjena mors",
-      "Tjenare",
-      "Tjenis",
-      "Tjenixen",
-      "Tjing tjing",
-      "Tjo",
-      "Tjoflöjt",
-      "Tjosan",
+      "Hello",
+      "Hi",
+      "Terve",
+      "Bonjour",
+      "Ciao",
+      "Hola",
+      "Witam", // Polska
+      "Kamusta",  // filipino
+      "Здравствуйте", // Ukrainska
+      "नमस्ते", // Hindi
+      "ሰላም", // Amharinha
+      "你好", // Kinesiska
+      "こんにちは", // Japanska
+      "여보세요", // Koreanska
+      "สวัสดี", // Thai
+      "გამარჯობა", // Georgiska
     ];
     var greeting_id = Math.floor(Math.random() * greetings.length);
     return greetings[greeting_id];

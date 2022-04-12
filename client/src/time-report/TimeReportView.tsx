@@ -74,7 +74,7 @@ const TimeReportView = ({ jwtToken, user, isAdmin }: TimeReportViewType) => {
   const renderButtons = () => isAdmin && <Button height={32} appearance="primary" intent="success" onClick={() => showAddNew()}>Lägg till</Button>;
 
   return (
-    <ViewWrapper title="Timrapport" renderButtons={renderButtons}>
+    <ViewWrapper title="Här har man slitit" renderButtons={renderButtons}>
       {<TimespanSelector onChange={(newFilter: DateFilter) =>
         dispatch(timeReportSlice.actions.setFilter(newFilter))
       }
